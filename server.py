@@ -174,13 +174,8 @@ async def check_usage() -> dict[str, Any]:
 
 
 def build_app():
-    """MCP's streamable-http ASGI app.
-
-    TEMPORARILY UNGATED: the bearer-token wrapper is disabled for now. Re-enable
-    by restoring `return BearerAuthMiddleware(mcp.streamable_http_app(), token=MCP_AUTH_TOKEN)`
-    before leaving this deployed anywhere reachable from the internet.
-    """
-    return mcp.streamable_http_app()
+    """MCP's streamable-http ASGI app, wrapped in the bearer-token gate."""
+    return BearerAuthMiddleware(mcp.streamable_http_app(), token=MCP_AUTH_TOKEN)
 
 
 app = build_app()  # for `uvicorn server:app` / most PaaS auto-detection
