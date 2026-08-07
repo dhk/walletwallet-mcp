@@ -91,7 +91,7 @@ class McpInitializationTests(unittest.TestCase):
                 "/mcp",
                 json=request,
                 headers={
-                    "Authorization": "Bearer test-mcp-token",
+                    "Authorization": f"Bearer {server.MCP_AUTH_TOKEN}",
                     "Accept": "application/json, text/event-stream",
                 },
             )
